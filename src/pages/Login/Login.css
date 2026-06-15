@@ -1,0 +1,60 @@
+/*Container principal do login, ocupando e cetralizando o conteudo*/
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/*Card de Login*/
+.p-fluid {
+    background-color: #1e1e1e;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/*Titulo do card*/
+.login-container h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/*Os labels e inputs*/
+
+.p-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.p-field label {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    font-weight: 500;
+}
+
+.p-inputtext,
+.p-password input {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.p-button {
+    margin-top: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
