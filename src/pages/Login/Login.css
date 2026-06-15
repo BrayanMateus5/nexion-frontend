@@ -1,16 +1,46 @@
 /*Container principal do login, ocupando e cetralizando o conteudo*/
-.login-container {
+.login-layout-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #121212;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/*O lado esquerdo do login*/
+.brand-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #0a0a0a;
+    border-right: 1px solid #2a2a2a;
 }
 
-/*Card de Login*/
+.logo-image {
+    width: 250px;
+    margin-bottom: 1.5rem;
+}
+
+.brand-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+
+/*O lado direito do login*/
+.form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
 .p-fluid {
     background-color: #1e1e1e;
     padding: 3rem 2.5rem;
@@ -23,17 +53,14 @@
     gap: 1.5rem;
 }
 
-/*Titulo do card*/
-.login-container h1 {
+.p-fluid h2 {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: #ffffff;
 }
-
-/*Os labels e inputs*/
 
 .p-field {
     display: flex;
@@ -44,17 +71,48 @@
 .p-field label {
     font-size: 0.9rem;
     color: #a0a0a0;
-    font-weight: 500;
+    font-weight: normal;
 }
 
-.p-inputtext,
-.p-password input {
+.p-fluid .p-inputtext,
+.p-fluid .p-password input {
     border-radius: 8px;
     width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    background-color: #252525;
+    Border: 1px solid #333333;
+    Color: #ffffff;
+    transition: all 0.2s ease-in-out;
 }
 
-.p-button {
+/*Efeito de foco com mudança de cor e sombra*/
+.p-fluid .p-inputtext:focus,
+.p-fluid .p-password input:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 3px rgba(14, 165, 233, 0.15);
+    background-color: #2a2a2a;
+}
+
+.p-fluid .p-password i {
+    color: #a0a0a0;
+}
+
+.nexion-btn {
+    width: 100%;
     margin-top: 1rem;
     border-radius: 8px;
     font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    border: none;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.nexion-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
 }
