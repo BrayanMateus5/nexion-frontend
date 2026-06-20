@@ -1,21 +1,19 @@
-/*Container principal do login, ocupando e cetralizando o conteudo*/
-.login-layout-container {
+.login-back-form {
     display: flex;
     min-height: 100vh;
     width: 100%;
-    background-color: #121212;
+    background-color: #101010;
     font-family: 'Inter', system-ui, sans-serif;
 }
 
-/*O lado esquerdo do login*/
-.brand-section {
+.brand-left-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0a0a0a;
-    border-right: 1px solid #2a2a2a;
+    background-color: #010101;
+    border-right: 1px solid #130d0d;
 }
 
 .logo-image {
@@ -23,29 +21,27 @@
     margin-bottom: 1.5rem;
 }
 
-.brand-name {
+.brand-logo-name {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 2px;
-    margin: 0;
+    color: #f7f3f3;
+    letter-spacing: 2.5px;
+    margin: 1rem;
 }
 
-
-/*O lado direito do login*/
-.form-section {
+.form-right-section {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 2.5rem;
 }
 
-.p-fluid {
-    background-color: #1e1e1e;
+.p-interna-form {
+    background-color: #111111;
     padding: 3rem 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(144, 144, 144, 0.5);
     width: 100%;
     max-width: 420px;
     display: flex;
@@ -53,48 +49,51 @@
     gap: 1.5rem;
 }
 
-.p-fluid h2 {
+.p-interna-form h2 {
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 0.7rem;
+    font-size: 2.1rem;
+    font-weight: 700;
     color: #ffffff;
 }
 
-.p-field {
+.p-inputs {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.p-field label {
-    font-size: 0.9rem;
-    color: #a0a0a0;
+.p-inputs label {
+    font-size: 1rem;
+    color: #ffffff;
     font-weight: normal;
 }
 
-.p-fluid .p-inputtext,
-.p-fluid .p-password input {
+.p-interna-form .p-inputtext,
+/*\ campos de email e senha*/
+.p-interna-form .p-password input {
+
     border-radius: 8px;
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 1rem 1rem;
     font-size: 1rem;
     background-color: #252525;
-    Border: 1px solid #333333;
-    Color: #ffffff;
+    border: 1px solid #333333;
+    color: #ffffff;
     transition: all 0.2s ease-in-out;
 }
 
-/*Efeito de foco com mudança de cor e sombra*/
-.p-fluid .p-inputtext:focus,
-.p-fluid .p-password input:focus {
+
+.p-interna-form .p-inputtext:focus,
+/*\ campos de email e senha*/
+.p-interna-form .p-password input:focus {
     border-color: #0ea5e9;
     box-shadow: 0 0 3px rgba(14, 165, 233, 0.15);
     background-color: #2a2a2a;
 }
 
-.p-fluid .p-password i {
+.p-interna-form .p-password i {
     color: #a0a0a0;
 }
 

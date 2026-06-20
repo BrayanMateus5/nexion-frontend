@@ -7,25 +7,25 @@ import './Login.css';
 
 export default function Login() {
     return (
-        <div className="login-layout-container">
+        <div className="login-back-form">
 
             {/*Lado da marca */}
-            <div className="brand-section">
+            <div className="brand-left-section">
                 <img src={logo} alt="Logo da Nexion" className="logo-image" />
-                <h1 className="brand-name">Nexion</h1>
+                <h1 className="brand-logo-name">Nexion</h1>
             </div>
 
             {/*Lado do formulário */}
-            <div className="form-section">
-                <div className="p-fluid">
-                    <h2>Entrar no Nexion</h2>
+            <div className="form-right-section">
+                <div className="p-interna-form">
+                    <h2>Entrar</h2>
 
-                    <div className="p-field">
+                    <div className="p-inputs">
                         <label htmlFor="email">Email</label>
                         <InputText id="email" type="text" placeholder="Digite seu email" />
                     </div>
 
-                    <div className="p-field">
+                    <div className="p-inputs">
                         <label htmlFor="password">Senha</label>
                         <Password id="password" placeholder="Digite sua senha" feedback={false} toggleMask />
                     </div>
