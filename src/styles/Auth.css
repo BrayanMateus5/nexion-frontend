@@ -1,0 +1,132 @@
+.auth-brand {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #010101;
+    border-right: 1px solid #130d0d;
+}
+
+.auth-page {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #101010;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.auth-form-card {
+    background-color: #111111;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(144, 144, 144, 0.5);
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.brand-logo-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #f7f3f3;
+    letter-spacing: 2.5px;
+    margin: 1rem;
+}
+
+.logo-image {
+    width: 250px;
+    margin-bottom: 1.5rem;
+}
+
+.form-right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+}
+
+.auth-form-card h2 {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 0.7rem;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.p-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.p-inputs label {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.auth-form-card .p-password {
+    width: 100%;
+    display: block;
+}
+
+.auth-form-card .p-inputtext,
+/*\ campos de email e senha*/
+.auth-form-card .p-password input {
+    border-radius: 8px;
+    width: 100%;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    background-color: #252525;
+    border: 1px solid #333333;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.auth-form-card .p-inputtext:focus,
+/*\ campos de email e senha*/
+.auth-form-card .p-password input:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 3px rgba(14, 165, 233, 0.15);
+    background-color: #2a2a2a;
+}
+
+.nexion-btn {
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    border: none;
+    color: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.nexion-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+.auth-link {
+    text-align: center;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+}
+
+.auth-link a {
+    color: #0ea5e9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}

@@ -1,21 +1,23 @@
-import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
+import { Link } from "react-router-dom";
 import logo from "../../assets/nexion-logo.png";
 import "./Login.css";
+import "../../styles/Auth.css";
 
-const login = () => {
+const Login = () => {
   return (
-    <div className="login-background-form">
+    <div className="auth-page">
       {/*Lado da marca */}
-      <div className="brand-left-section">
+      <div className="auth-brand">
         <img src={logo} alt="Logo da Nexion" className="logo-image" />
         <h1 className="brand-logo-name">Nexion</h1>
       </div>
 
       {/*Lado do formulário */}
       <div className="form-right-section">
-        <div className="p-inside-form">
+        <div className="auth-form-card">
           <h2>Entrar</h2>
 
           <div className="p-inputs">
@@ -35,8 +37,8 @@ const login = () => {
 
           <Button label="Entrar" className="nexion-btn" />
 
-          <p className="link-register">
-            Não possui conta ? <a href="/register">Cadastre-se</a>
+          <p className="auth-link">
+            Não possui conta ? <Link to="/register">Cadastre-se</Link>
           </p>
         </div>
       </div>
@@ -44,4 +46,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

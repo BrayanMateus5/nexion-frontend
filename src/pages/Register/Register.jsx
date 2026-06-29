@@ -2,21 +2,21 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import "./Register.css";
+import logo from "../../assets/nexion-logo.png";
+import "../../styles/Auth.css";
 
 const Register = () => {
   return (
-    <div className="register-background-form">
+    <div className="auth-page">
       {/*Memo lado esquerdo do login*/}
-      <div className="brand-left-section">
+      <div className="auth-brand">
         <img src={logo} alt="Logo da Nexion" className="logo-image" />
         <h1 className="brand-logo-name">Nexion</h1>
       </div>
 
       {/*aqui é o lado direito com o novo form*/}
       <div className="form-right-section">
-        <form className="p-inside-form">
+        <form className="auth-form-card">
           <h2>Criar conta</h2>
 
           <div className="p-inputs">
@@ -40,7 +40,7 @@ const Register = () => {
           </div>
 
           <div className="p-inputs">
-            <label htmlFor="confirmaSenha">Confirmar Senha</label>
+            <label htmlFor="confirmarSenha">Confirmar Senha</label>
             <Password
               id="confirmarSenha"
               placeholder="Repita a senha"
@@ -51,8 +51,8 @@ const Register = () => {
 
           <Button label="Cadastrar" className="nexion-btn" />
 
-          <p className="link-login">
-            Já possui conta ? <Link to="/Login">Entrar</Link>
+          <p className="auth-link">
+            Já possui conta ? <Link to="/login">Entrar</Link>
           </p>
         </form>
       </div>
