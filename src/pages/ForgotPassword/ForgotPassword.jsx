@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { inputText } from "primereact/inputtext";
+import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/nexion-logo.png";
 import "../../styles/Auth.css";
-import AuthService from "../../services/authService";
+import AuthService from "../../services/AuthService";
 
 const authService = new AuthService();
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [erro, setErro] = useState("");
-  const [message, setMessage] = useState("");
+  const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const response = await authService.emailForgotPassword(email);
-      setMessage(response.data.message);
+      setMensagem(response.data.message);
     } finally {
       setLoading(false);
     }
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
         <h1 className="brand-logo-name">Nexion</h1>
       </div>
       <div className="form-right-section">
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className="auth-form-card" onSubmit={handleSubmit}>
           <h2>Recuperar senha</h2>
 
           {mensagem /*Aqui no caso,  */ ? (
@@ -51,13 +51,13 @@ const ForgotPassword = () => {
             <>
               <div className="p-inputs">
                 <label htmlFor="email">Email</label>
-                <inputText
+                <InputText
                   id="email"
                   placeholder="Digite seu email de cadastro"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {erro && <small className="erro-message">{erro}</small>}
+                {erro && <small className="error-message">{erro}</small>}
               </div>
 
               <Button
@@ -69,7 +69,7 @@ const ForgotPassword = () => {
             </>
           )}
           <p className="auth-link">
-            Se lemboru da senha ? <Link to="/login">Voltar ao Login</Link>
+            Se lembrou da senha ? <Link to="/login">Voltar ao Login</Link>
           </p>
         </form>
       </div>

@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 const App = () => {
@@ -10,6 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/recuperar-senha" element={<ForgotPassword />} />
+        <Route path="/redefinir-senha/:token" element={<ResetPassword />} />
         <Route
           path="/dashboard"
           element={
