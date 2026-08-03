@@ -22,5 +22,16 @@ class AuthService extends BaseService {
         }, 1500);
     });
     }
+    async register(nome, email, senha) {
+        return new Promise((aceita, rejeita) => {
+            setTimeout(() => {
+                if (email === "brayan@nexion.com") {
+                    rejeita(new Error("Email já cadastrado"));
+                } else {
+                    aceita({ data: { message: "Usuário cadastrado com sucesso" } });
+                }
+}, 1500);
+        });
+    }
 }
-export default AuthService;
+    export default AuthService;
