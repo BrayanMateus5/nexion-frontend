@@ -33,5 +33,28 @@ class AuthService extends BaseService {
 }, 1500);
         });
     }
+    /*aqui sempre será aceita a solicitação da recuperação da senha*/
+    async emailForgotPassword(email) {
+        return new Promise((aceita) => {
+            setTimeout(() => {
+                aceita({ data: { message: "Se o email citado, estiver cadastrado, você receberá as instruções...",    
+                },
+            });
+            }, 1500);
+        });
 }
-    export default AuthService;
+/*aqui, primeiro valida se tem token, mesmo que seja vazio, se tiver, aceita a solicitação de alteração da senha*/
+
+async resetPassword(token, novaSenha) {
+    return new Promise((aceita, rejeita) => {
+        setTimeout(() => {
+            if (!token) {
+                rejeita(new Error("Token inválido"));
+            } else {
+                aceita({ data: { message: "Senha alterada com sucesso" } });
+            }
+        }, 1500);
+    });
+}
+}
+export default AuthService;
