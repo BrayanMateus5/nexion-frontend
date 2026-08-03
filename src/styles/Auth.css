@@ -130,3 +130,32 @@
 .auth-link a:hover {
     text-decoration: underline;
 }
+
+.error-message {
+    color: #f87171;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.error-geral {
+    color: #f87171;
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: rgba (248, 113, 113, 0.1);
+    border: 1px solid rgba (248, 113, 113, 0.3);
+    border-radius: 8px;
+    padding: 0.6rem;
+    margin: 0;
+}
+
+/*Travar cor de fundo dos quadros quando o navegador preenche automaticamente os campos de email e senha*/
+.auth-form-card input:-webkit-autofill,
+.auth-form-card input:-webkit-autofill:hover,
+.auth-form-card input:-webkit-autofill:focus {
+    
+    -webkit-box-shadow: 0 0 0px 1000px #252525 inset;   /*pinta o fundo do quadro*/ 
+    -webkit-text-fill-color: #ffffff;                   /*pinta a cor da letra*/
+
+    caret-color: #ffffff;                                  /*pinta a cor do cursor*/
+    transition: background-color 5000s ease-in-out 0s;         /*evita que o navegador pinte o fundo do quadro de branco*/
+}

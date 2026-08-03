@@ -1,0 +1,77 @@
+.dashboard {
+    min-height: 100vh;
+    background-color: #101010;
+    color: #ffffff;
+    padding: 2rem;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.resumo-financeiro {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+    .card {
+        flex: 1;
+        background-color: #111111;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 1.5rem;
+    }
+
+    .card p {
+        color: #a0a0a0;
+        margin: 0 0 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .card strong {
+        font-size: 1.8rem;
+    }
+
+    .valor-receita {
+        color: #4ade80; /* Verde */
+    }
+    .valor-despesa {
+        color: #f87171; /* Vermelho */
+    }
+
+    .lancamentos-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .lancamento {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1a1a1a;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        border-left: 4px solid transparent;
+    }
+
+    .lancamento.receita {
+        border-left-color: #4ade80; /* Verde */
+    }
+    .lancamento.despesa {
+        border-left-color: #f87171; /* Vermelho */
+    }
+
+    .grafico-mensal {
+        background-color: #1a1a1a;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
