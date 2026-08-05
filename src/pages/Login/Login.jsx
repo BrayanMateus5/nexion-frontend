@@ -35,7 +35,9 @@ const Login = () => {
 
     return novosErros;
   };
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     const novosErros = validar();
     if (Object.keys(novosErros).length > 0) {
       setError(novosErros);
@@ -70,7 +72,7 @@ const Login = () => {
 
       {/*Lado do formulário */}
       <div className="form-right-section">
-        <div className="auth-form-card">
+        <form className="auth-form-card" onSubmit={handleLogin}>
           <h2>Entrar</h2>
 
           <div className="p-inputs">
@@ -81,6 +83,7 @@ const Login = () => {
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
             />
             {error.email && (
               <span className="error-message">{error.email}</span>
@@ -96,6 +99,7 @@ const Login = () => {
               toggleMask
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
             />
             {error.password && (
               <small className="error-message">{error.password}</small>
@@ -106,14 +110,14 @@ const Login = () => {
           <Button
             label={loading ? "Entrando..." : "Entrar"}
             className="nexion-btn"
-            onClick={handleLogin}
+            type="submit"
             disabled={loading}
           />
 
           <p className="auth-link">
             Não possui conta ? <Link to="/register">Cadastre-se</Link>
           </p>
-        </div>
+        </form>
       </div>
     </div>
   );
