@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import AlterarSenha from "./pages/UpdatePassword/UpdatePassword";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 const App = () => {
@@ -19,6 +20,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/app/perfil/senha"
+          element={
+            <ProtectedRoute>
+              <AlterarSenha />
             </ProtectedRoute>
           }
         />

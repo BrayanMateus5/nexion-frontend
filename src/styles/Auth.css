@@ -131,13 +131,13 @@
     text-decoration: underline;
 }
 
-.erro-message {
+.error-message {
     color: #f87171;
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
 
-.erro-geral {
+.error-geral {
     color: #f87171;
     font-size: 0.9rem;
     text-align: center;
