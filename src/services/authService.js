@@ -22,6 +22,7 @@ class AuthService extends BaseService {
         }, 1500);
     });
     }
+    //aqui é para registro de email e validação se ele existe ou não
     async register(nome, email, senha) {
         return new Promise((aceita, rejeita) => {
             setTimeout(() => {
@@ -44,7 +45,6 @@ class AuthService extends BaseService {
         });
 }
 /*aqui, primeiro valida se tem token, mesmo que seja vazio, se tiver, aceita a solicitação de alteração da senha*/
-
 async resetPassword(token, novaSenha) {
     return new Promise((aceita, rejeita) => {
         setTimeout(() => {
@@ -56,5 +56,17 @@ async resetPassword(token, novaSenha) {
         }, 1500);
     });
 }
+//aqui é pra alterar a senha quando já estiver logado e que precisa da senha atual
+    async alterarSenha(senhaAtual, novaSenha) {    //recebe nova senha
+        return new Promise((aceita, rejeita) => {
+            setTimeout(() => {
+                if(senhaAtual !== "123456") {     //Verfica se é a senha atual
+                    rejeita(new Error("A senha atual está incorreta.."));
+                }else {
+                    aceita({ data: { message: "Senha alterada com sucesso !!"} });
+                }
+            }, 1500);
+        });
+    }
 }
 export default AuthService;
