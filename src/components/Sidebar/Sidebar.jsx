@@ -31,10 +31,11 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </Link>
 
-        {/*ainda vai ser feito*/}
         <div className="nav-item">
-          <i className="pi pi-wallet" />
-          <span>Transações</span>
+          <Link to="/transactions" className="nav-item">
+            <i className="pi pi-wallet" />
+            <span>Transações</span>
+          </Link>
         </div>
         <div className="nav-item">
           <i className="pi pi-tags" />

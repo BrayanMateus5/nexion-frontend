@@ -4,7 +4,6 @@ import { Password } from "primereact/password";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/nexion-logo.png";
-import AuthService from "../../services/AuthService";
 import "../../styles/Auth.css";
 import "./Login.css";
 
@@ -51,7 +50,12 @@ const Login = () => {
       const response = await AuthServiceInstance.login(email, password);
 
       localStorage.setItem("nexion_token", response.data.accessToken);
-      localStorage.setItem("nexion_user", JSON.stringify(response.data.user));
+
+      const u = response.data.user;
+      localStorage.setItem(
+        "nexion_user",
+        JSON.stringify({ ...u, nome: u.name }),
+      );
 
       navigate("/dashboard");
     } catch (erro) {

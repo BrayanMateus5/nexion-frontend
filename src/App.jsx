@@ -6,6 +6,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import AlterarSenha from "./pages/UpdatePassword/UpdatePassword";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Transacoes from "./pages/Transactions/Transactions";
 
 const App = () => {
   return (
@@ -32,6 +33,14 @@ const App = () => {
           }
         />
         <Route path="*" element={<Navigate to="/login" />} />
+        <Route
+          path="/transactions"
+          element={
+            <ProtectedRoute>
+              <Transacoes />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
