@@ -4,6 +4,7 @@ import { Password } from "primereact/password";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/nexion-logo.png";
+import AuthService from "../../services/authService";
 import "../../styles/Auth.css";
 import "./Login.css";
 
