@@ -14,15 +14,25 @@ import {
   CartesianGrid,
 } from "recharts";
 
+const DADOS_FINANCEIROS_VAZIOS = {
+  resumo: {
+    saldo: 0,
+    receitas: 0,
+    despesas: 0,
+  },
+  graficoMensal: [],
+  lancamentos: [],
+};
+
 const Dashboard = () => {
   //função para leitura e salvar o login do usuário no localStorage
   const usuarioLogado = JSON.parse(localStorage.getItem("nexion_user"));
-  const [dados, setDados] = useState(null); /*vai começar vazio*/
+  const [dados, setDados] = useState(DADOS_FINANCEIROS_VAZIOS);
   const [loading, setLoading] = useState(true); /*depois inicia o carregamento*/
 
   useEffect(() => {
     buscarDadosFinanceiros().then((resposta) => {
-      setDados(resposta);
+      setDados(resposta ?? DADOS_FINANCEIROS_VAZIOS);
       setLoading(false);
     });
   }, []);
@@ -44,18 +54,18 @@ const Dashboard = () => {
           <div className="resumo-financeiro">
             <div className="card">
               <p>Saldo</p>
-              <strong>{formatarMoeda(dados.resumo.saldo)}</strong>
+              <strong>{formatarMoeda(dados.resumo?.saldo ?? 0)}</strong>
             </div>
             <div className="card">
               <p>Receitas</p>
               <strong className="valor-receita">
-                {formatarMoeda(dados.resumo.receitas)}
+                {formatarMoeda(dados.resumo?.receitas ?? 0)}
               </strong>
             </div>
             <div className="card">
               <p>Despesas</p>
               <strong className="valor-despesa">
-                {formatarMoeda(dados.resumo.despesas)}
+                {formatarMoeda(dados.resumo?.despesas ?? 0)}
               </strong>
             </div>
           </div>
@@ -64,7 +74,7 @@ const Dashboard = () => {
             <h2>Receitas X Despesas (últimos meses)</h2>
             <ResponsiveContainer width="100%" height={300}>
               {/*responsividade*/}
-              <BarChart data={dados.graficoMensal}>
+              <BarChart data={dados.graficoMensal ?? []}>
                 {/*dados do gráfico*/}
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
                 {/*linhas do gráfico*/}
@@ -83,7 +93,7 @@ const Dashboard = () => {
           {/*parte de lançamentos*/}
           <h2>Lançamentos recentes</h2>
           <ul className="lancamentos-list">
-            {dados.lancamentos.map((lancamento) => (
+            {(dados.lancamentos ?? []).map((lancamento) => (
               <li
                 key={lancamento.id}
                 className={

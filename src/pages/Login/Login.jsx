@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthService from "../../services/AuthService";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/nexion-logo.png";
-import "./Login.css";
+import AuthService from "../../services/AuthService";
 import "../../styles/Auth.css";
+import "./Login.css";
 
 const AuthServiceInstance = new AuthService();
 
@@ -56,7 +55,7 @@ const Login = () => {
 
       navigate("/dashboard");
     } catch (erro) {
-      setErroGeral(erro.message);
+      setErroGeral(erro.response?.data?.message || "Erro ao processar");
     } finally {
       setLoading(false);
     }
