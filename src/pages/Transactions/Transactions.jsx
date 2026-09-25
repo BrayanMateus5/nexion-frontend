@@ -6,8 +6,6 @@ import "../Dashboard/Dashboard.css";
 import { formatarMoeda } from "../../utils/formatarMoeda";
 
 const Transacoes = () => {
-  const usuario = JSON.parse(localStorage.getItem("nexion_user"));
-
   const [walletId, setWalletId] = useState(null);
   const [transacoes, setTransacoes] = useState([]);
   const [tipo, setTipo] = useState("EXPENSE");
@@ -24,7 +22,6 @@ const Transacoes = () => {
         let wallets = resp.data;
         if (wallets.length === 0) {
           const nova = await api.post("/api/v1/wallets", {
-            ownerId: usuario.id,
             name: "Minha Carteira",
           });
           wallets = [nova.data];
@@ -53,7 +50,6 @@ const Transacoes = () => {
         amount: parseFloat(valor),
         description: descricao,
         date: data,
-        createdById: usuario.id,
       });
       setValor("");
       setDescricao("");
