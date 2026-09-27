@@ -1,17 +1,27 @@
 import { useState, useEffect } from "react";
 import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+import { InputNumber } from "primereact/inputnumber";
+import { InputText } from "primereact/inputtext";
+import { Calendar } from "primereact/calendar";
 import api from "../../configs/axiosConfig";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import "../Dashboard/Dashboard.css";
 import { formatarMoeda } from "../../utils/formatarMoeda";
+import "../Dashboard/Dashboard.css";
+import "./Transactions.css";
+
+const TIPOS = [
+  { label: "Receita", value: "INCOME" },
+  { label: "Despesa", value: "EXPENSE" },
+];
 
 const Transacoes = () => {
   const [walletId, setWalletId] = useState(null);
   const [transacoes, setTransacoes] = useState([]);
   const [tipo, setTipo] = useState("EXPENSE");
-  const [valor, setValor] = useState("");
+  const [valor, setValor] = useState(null);
   const [descricao, setDescricao] = useState("");
-  const [data, setData] = useState(new Date().toISOString().split("T")[0]);
+  const [data, setData] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
 
@@ -47,11 +57,11 @@ const Transacoes = () => {
     try {
       await api.post(`/api/v1/wallets/${walletId}/transactions`, {
         type: tipo,
-        amount: parseFloat(valor),
+        amount: valor,
         description: descricao,
-        date: data,
+        date: data.toISOString().split("T")[0],
       });
-      setValor("");
+      setValor(null);
       setDescricao("");
       carregar(walletId);
     } catch (err) {
@@ -68,45 +78,48 @@ const Transacoes = () => {
         <h1>Transações</h1>
         {erro && <p className="error-geral">{erro}</p>}
 
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            gap: "0.75rem",
-            flexWrap: "wrap",
-            margin: "1.5rem 0",
-          }}
-        >
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            style={{ padding: "0.6rem", borderRadius: "8px" }}
-          >
-            <option value="INCOME">Receita</option>
-            <option value="EXPENSE">Despesa</option>
-          </select>
-          <input
-            type="number"
-            step="0.01"
-            placeholder="Valor"
-            value={valor}
-            onChange={(e) => setValor(e.target.value)}
-            required
-            style={{ padding: "0.6rem", borderRadius: "8px" }}
-          />
-          <input
-            type="text"
-            placeholder="Descrição"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
-            style={{ padding: "0.6rem", borderRadius: "8px" }}
-          />
-          <input
-            type="date"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-            style={{ padding: "0.6rem", borderRadius: "8px" }}
-          />
+        <form onSubmit={handleSubmit} className="transacao-form-grid">
+          <div className="p-inputs">
+            <label htmlFor="tipo">Tipo</label>
+            <Dropdown
+              id="tipo"
+              value={tipo}
+              options={TIPOS}
+              onChange={(e) => setTipo(e.value)}
+            />
+          </div>
+
+          <div className="p-inputs">
+            <label htmlFor="valor">Valor</label>
+            <InputNumber
+              id="valor"
+              value={valor}
+              onValueChange={(e) => setValor(e.value)}
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          </div>
+
+          <div className="p-inputs">
+            <label htmlFor="descricao">Descrição</label>
+            <InputText
+              id="descricao"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+            />
+          </div>
+
+          <div className="p-inputs">
+            <label htmlFor="data">Data</label>
+            <Calendar
+              id="data"
+              value={data}
+              onChange={(e) => setData(e.value)}
+              dateFormat="dd/mm/yy"
+            />
+          </div>
+
           <Button
             label={loading ? "Salvando..." : "Adicionar"}
             type="submit"
