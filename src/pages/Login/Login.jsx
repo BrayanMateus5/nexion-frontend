@@ -28,8 +28,8 @@ const Login = () => {
 
     if (!password) {
       novosErros.password = "O campo de senha é obrigatório.";
-    } else if (password.length < 6) {
-      novosErros.password = "A senha deve ter pelo menos 6 caracteres.";
+    } else if (password.length < 8) {
+      novosErros.password = "A senha deve ter pelo menos 8 caracteres.";
     }
 
     return novosErros;

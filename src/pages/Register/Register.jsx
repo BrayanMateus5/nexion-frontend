@@ -35,8 +35,8 @@ const Register = () => {
     }
     if (!senha) {
       novosErros.senha = "A senha é obrigatória.";
-    } else if (senha.length < 6) {
-      novosErros.senha = "A senha deve ter pelo menos 6 caracteres.";
+    } else if (senha.length < 8) {
+      novosErros.senha = "A senha deve ter pelo menos 8 caracteres.";
     }
 
     if (confirmarSenha !== senha) {
