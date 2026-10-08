@@ -23,7 +23,8 @@ const Transacoes = () => {
   const [descricao, setDescricao] = useState("");
   const [data, setData] = useState(new Date());
   const [loading, setLoading] = useState(false);
-  const [erro, setErro] = useState("");
+  const [erroGeral, setErroGeral] = useState("");
+  const [error, setError] = useState({});
 
   useEffect(() => {
     async function init() {
@@ -50,9 +51,26 @@ const Transacoes = () => {
     setTransacoes(resp.data);
   }
 
+  const validar = () => {
+    const novosErros = {};
+    
+    if(!valor) {
+      novosErros.valor = "O valor é obrigatório.";
+    }else if (valor <= 0) {
+      novosErros.valor = "O valor deve ser maior do que zero.";
+    }
+
+    return novosErros;
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
-    setErro("");
+    const novosErros = validar();
+    if(Object.keys(novosErros).length > 0) {
+      setError(novosErros);
+      return;
+    }
+    setError({});
     setLoading(true);
     try {
       await api.post(`/api/v1/wallets/${walletId}/transactions`, {
@@ -87,6 +105,8 @@ const Transacoes = () => {
               options={TIPOS}
               onChange={(e) => setTipo(e.value)}
             />
+          {error.valor && <span className="error-message">{error.valor}</span>}
+
           </div>
 
           <div className="p-inputs">
@@ -99,6 +119,8 @@ const Transacoes = () => {
               currency="BRL"
               locale="pt-BR"
             />
+            {error.valor && <span className="error-message">{error.valor}</span>}
+
           </div>
 
           <div className="p-inputs">
@@ -108,6 +130,8 @@ const Transacoes = () => {
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
             />
+            {error.valor && <span className="error-message">{error.valor}</span>}
+
           </div>
 
           <div className="p-inputs">
@@ -118,6 +142,8 @@ const Transacoes = () => {
               onChange={(e) => setData(e.value)}
               dateFormat="dd/mm/yy"
             />
+            {error.valor && <span className="error-message">{error.valor}</span>}
+
           </div>
 
           <Button
