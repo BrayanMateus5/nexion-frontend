@@ -40,7 +40,7 @@ const Transacoes = () => {
         setWalletId(wallets[0].id);
         carregar(wallets[0].id);
       } catch {
-        setErro("Erro ao carregar a carteira");
+        setErroGeral("Erro ao carregar a carteira");
       }
     }
     init();
@@ -59,6 +59,15 @@ const Transacoes = () => {
     }else if (valor <= 0) {
       novosErros.valor = "O valor deve ser maior do que zero.";
     }
+// esse .trim é pra remover os espaços no início e no fim das palavras..
+    if(!descricao.trim()) {
+      novosErros.descricao = "A descrição é obrigatória.";
+    }
+    if (!data) {
+      novosErros.data = "A data é obrigatória.";
+    }else if (data > new Date()) {    //se a data escolhida for maior que a atual
+      novosErros.data = "Não pode ser uma data futura.";
+    }
 
     return novosErros;
   };
@@ -66,7 +75,7 @@ const Transacoes = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     const novosErros = validar();
-    if(Object.keys(novosErros).length > 0) {
+    if(Object.keys(novosErros).length > 0) {       //pergunta se achou algum erro
       setError(novosErros);
       return;
     }
@@ -83,7 +92,7 @@ const Transacoes = () => {
       setDescricao("");
       carregar(walletId);
     } catch (err) {
-      setErro(err.response?.data?.message || "Erro ao criar transação");
+      setErroGeral(err.response?.data?.message || "Erro ao criar transação");
     } finally {
       setLoading(false);
     }
@@ -94,7 +103,7 @@ const Transacoes = () => {
       <Sidebar />
       <div className="dashboard-content">
         <h1>Transações</h1>
-        {erro && <p className="error-geral">{erro}</p>}
+        {erroGeral && <p className="error-geral">{erroGeral}</p>}
 
         <form onSubmit={handleSubmit} className="transacao-form-grid">
           <div className="p-inputs">
@@ -105,8 +114,6 @@ const Transacoes = () => {
               options={TIPOS}
               onChange={(e) => setTipo(e.value)}
             />
-          {error.valor && <span className="error-message">{error.valor}</span>}
-
           </div>
 
           <div className="p-inputs">
@@ -130,7 +137,7 @@ const Transacoes = () => {
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
             />
-            {error.valor && <span className="error-message">{error.valor}</span>}
+            {error.descricao && <span className="error-message">{error.descricao}</span>}
 
           </div>
 
@@ -142,7 +149,7 @@ const Transacoes = () => {
               onChange={(e) => setData(e.value)}
               dateFormat="dd/mm/yy"
             />
-            {error.valor && <span className="error-message">{error.valor}</span>}
+            {error.data && <span className="error-message">{error.data}</span>}
 
           </div>
 
@@ -155,6 +162,13 @@ const Transacoes = () => {
         </form>
 
         <h2>Lançamentos</h2>
+
+        {transacoes.length === 0 ? (
+        <p className="lista-vazia">
+          Nenhuma transação ainda. Corra e adicione a sua primeira !!
+        </p>  
+        ) : ( 
+
         <ul className="lancamentos-list">
           {transacoes.map((t) => (
             <li
@@ -171,6 +185,7 @@ const Transacoes = () => {
             </li>
           ))}
         </ul>
+        )}
       </div>
     </div>
   );
