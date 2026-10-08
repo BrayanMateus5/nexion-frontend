@@ -1,11 +1,40 @@
 .transacao-form-grid {
     background-color: #1a1a1a;
-    border: 1px, solid #2a2a2a;
+    border: 1px solid #2a2a2a;
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax (200px, 1fr));  /*define a responsividade do grid*/
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /*define a responsividade do grid*/
     gap: 1rem;
     align-items:end;
+}
+.transacao-form-grid .p-dropdown,
+.transacao-form-grid .p-calendar,
+.transacao-form-grid .p-inputnumber {
+    width: 100%;
+}
+
+.transacao-form-grid .p-inputtext {
+    background-color: #252525;
+    border: 1px solid #333333;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 100%;
+}
+
+.transacao-form-grid .p-inputtext:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 3px rgba(14, 165, 233, 0.15);
+    background-color: #2a2a2a;
+}
+
+.lista-vazia {
+    color: #a0a0a0;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #1a1a1a;
+    border: 1px dashed #2a2a2a;
+    text-align: center;
 }
