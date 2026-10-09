@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
+import logo from "../../assets/nexion-logo.png";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Sidebar = () => {
       {" "}
       {/*o aside = conteúdo lateral*/}
       <div className="sidebar-brand">
+        <img src={logo} alt="Logo da Nexion" className="sidebar-logo" />
         <h1>Nexion</h1>
       </div>
       <div className="sidebar-user">
@@ -31,12 +33,12 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </Link>
 
-        <div className="nav-item">
+        
           <Link to="/transactions" className="nav-item">
             <i className="pi pi-wallet" />
             <span>Transações</span>
           </Link>
-        </div>
+
         <div className="nav-item">
           <i className="pi pi-tags" />
           <span>Categorias</span>

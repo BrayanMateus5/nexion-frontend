@@ -32,12 +32,12 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/login" />} />
         <Route
           path="/transactions"
           element={
             <ProtectedRoute>
               <Transacoes />
+              <Route path="*" element={<Navigate to="/login" />} />
             </ProtectedRoute>
           }
         />

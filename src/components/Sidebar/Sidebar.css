@@ -83,3 +83,16 @@
 .sidebar-logout:hover {
   background-color: rgba(248, 113, 113, 0.1);
 }
+
+.sidebar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
