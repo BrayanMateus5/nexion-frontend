@@ -115,6 +115,13 @@ const Transacoes = () => {
               onChange={(e) => setTipo(e.value)}
             />
           </div>
+            <Button
+            label={loading ? "Salvando..." : "Adicionar"}
+            type="submit"
+            className="nexion-btn"
+            disabled={loading}
+          />
+          </form>
 
           <div className="p-inputs">
             <label htmlFor="valor">Valor</label>
@@ -152,14 +159,6 @@ const Transacoes = () => {
             {error.data && <span className="error-message">{error.data}</span>}
 
           </div>
-
-          <Button
-            label={loading ? "Salvando..." : "Adicionar"}
-            type="submit"
-            className="nexion-btn"
-            disabled={loading}
-          />
-        </form>
 
         <h2>Lançamentos</h2>
 

@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /*define a responsividade do grid*/
     gap: 1rem;
-    align-items:end;
+    align-items:start;
 }
 .transacao-form-grid .p-dropdown,
 .transacao-form-grid .p-calendar,
@@ -37,4 +37,13 @@
     background-color: #1a1a1a;
     border: 1px dashed #2a2a2a;
     text-align: center;
+}
+
+.transacao-form-grid .nexion-btn {
+ grid-column: 1 / -1; /* Faz o botão ocupar toda a largura do grid */
+ width: auto;
+ display: block;
+ margin-left: auto;
+ margin-top: 1.5rem;
+ padding: 0.75rem 2.5rem;
 }
