@@ -105,7 +105,10 @@ const Transacoes = () => {
         <h1>Transações</h1>
         {erroGeral && <p className="error-geral">{erroGeral}</p>}
 
-        <form onSubmit={handleSubmit} className="transacao-form-grid">
+        <form onSubmit={handleSubmit} className="transacao-form">
+          
+          <div className="transacao-form-grid">
+
           <div className="p-inputs">
             <label htmlFor="tipo">Tipo</label>
             <Dropdown
@@ -115,13 +118,6 @@ const Transacoes = () => {
               onChange={(e) => setTipo(e.value)}
             />
           </div>
-            <Button
-            label={loading ? "Salvando..." : "Adicionar"}
-            type="submit"
-            className="nexion-btn"
-            disabled={loading}
-          />
-          </form>
 
           <div className="p-inputs">
             <label htmlFor="valor">Valor</label>
@@ -159,6 +155,15 @@ const Transacoes = () => {
             {error.data && <span className="error-message">{error.data}</span>}
 
           </div>
+          </div>
+          
+            <Button
+            label={loading ? "Salvando..." : "Adicionar"}
+            type="submit"
+            className="nexion-btn"
+            disabled={loading}
+          />
+          </form>
 
         <h2>Lançamentos</h2>
 
@@ -185,6 +190,7 @@ const Transacoes = () => {
           ))}
         </ul>
         )}
+        
       </div>
     </div>
   );

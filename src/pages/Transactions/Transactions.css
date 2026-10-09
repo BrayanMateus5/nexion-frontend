@@ -1,9 +1,12 @@
-.transacao-form-grid {
+.transacao-form {
     background-color: #1a1a1a;
     border: 1px solid #2a2a2a;
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2.5rem;
+}
+
+.transacao-form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /*define a responsividade do grid*/
     gap: 1rem;
@@ -39,8 +42,7 @@
     text-align: center;
 }
 
-.transacao-form-grid .nexion-btn {
- grid-column: 1 / -1; /* Faz o botão ocupar toda a largura do grid */
+.transacao-form .nexion-btn {
  width: auto;
  display: block;
  margin-left: auto;
