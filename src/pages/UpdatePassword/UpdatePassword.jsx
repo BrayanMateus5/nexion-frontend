@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { calcularForcaSenha } from "../../utils/forcaSenha";
-import AuthService from "../../services/AuthService";
+import AuthService from "../../services/authService";
 import logo from "../../assets/nexion-logo.png";
 import "../../styles/Auth.css";
 
@@ -50,13 +50,13 @@ const UpdatePassword = () => {
     setLoading(true);
 
     try {
-      const resposta = await authService.alterarSenha(senhaAtual, novaSenha);
-      setSucesso(resposta.data.message);
+      await authService.alterarSenha(senhaAtual, novaSenha);
+      setSucesso("Senha alterada com sucesso!");
       setSenhaAtual("");
       setNovaSenha("");
       setConfirmarSenha("");
     } catch (error) {
-      setErro({ senhaAtual: error.message });
+      setErro({ senhaAtual: error.response?.data?.message || "Erro ao alterar a senha",});
     } finally {
       setLoading(false);
     }

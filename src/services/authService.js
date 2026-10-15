@@ -35,17 +35,9 @@ async resetPassword(token, novaSenha) {
         }, 1500);
     });
 }
-//aqui é pra alterar a senha quando já estiver logado e que precisa da senha atual
-    async alterarSenha(senhaAtual, novaSenha) {    //recebe nova senha
-        return new Promise((aceita, rejeita) => {
-            setTimeout(() => {
-                if(senhaAtual !== "123456") {     //Verfica se é a senha atual
-                    rejeita(new Error("A senha atual está incorreta.."));
-                }else {
-                    aceita({ data: { message: "Senha alterada com sucesso !!"} });
-                }
-            }, 1500);
-        });
+
+async alterarSenha(senhaAtual, novaSenha) {
+    return this.api.patch("/api/v1/users/me/password", { currentPassword: senhaAtual, newPassword: novaSenha });
     }
 }
 export default AuthService;

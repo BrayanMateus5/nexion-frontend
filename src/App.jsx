@@ -37,10 +37,10 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Transacoes />
-              <Route path="*" element={<Navigate to="/login" />} />
             </ProtectedRoute>
           }
         />
+          <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );

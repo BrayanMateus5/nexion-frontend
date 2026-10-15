@@ -4,7 +4,7 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import logo from "../../assets/nexion-logo.png";
 import "../../styles/Auth.css";
-import AuthService from "../../services/AuthService";
+import AuthService from "../../services/authService";
 
 const authService = new AuthService();
 
