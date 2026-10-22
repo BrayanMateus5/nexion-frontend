@@ -119,6 +119,9 @@ const Login = () => {
           />
 
           <p className="auth-link">
+            <Link to="/recuperar-senha">Esqueci minha senha</Link>
+          </p>
+          <p className="auth-link">
             Não possui conta ? <Link to="/register">Cadastre-se</Link>
           </p>
         </form>

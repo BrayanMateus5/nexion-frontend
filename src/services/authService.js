@@ -13,27 +13,14 @@ class AuthService extends BaseService {
     return this.api.post("/auth/register", { name: nome, email, password: senha });
 
     }
-    /*aqui sempre será aceita a solicitação da recuperação da senha*/
+    /*Para o envio do email de recuperação de senha, é necessário apenas o email do usuário, que será enviado para a api, que por sua vez enviará o email com o token para o usuário*/
     async emailForgotPassword(email) {
-        return new Promise((aceita) => {
-            setTimeout(() => {
-                aceita({ data: { message: "Se o email citado, estiver cadastrado, você receberá as instruções...",    
-                },
-            });
-            }, 1500);
-        });
+        return this.api.post("/auth/forgot-password", { email });
 }
-/*aqui, primeiro valida se tem token, mesmo que seja vazio, se tiver, aceita a solicitação de alteração da senha*/
+
+/*Para a redefinição da senha, é necessário o token enviado para o email do usuário e a nova senha que ele deseja definir, que será enviada para a api, que por sua vez atualizará a senha do usuário no banco de dados*/
 async resetPassword(token, novaSenha) {
-    return new Promise((aceita, rejeita) => {
-        setTimeout(() => {
-            if (!token) {
-                rejeita(new Error("Token inválido"));
-            } else {
-                aceita({ data: { message: "Senha alterada com sucesso" } });
-            }
-        }, 1500);
-    });
+    return this.api.post("/auth/reset-password", { token, newPassword: novaSenha });
 }
 
 async alterarSenha(senhaAtual, novaSenha) {

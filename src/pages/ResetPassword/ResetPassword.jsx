@@ -53,7 +53,7 @@ const ResetPassword = () => {
       await authService.resetPassword(token, novaSenha); //envia o token e a nova senha//
       navigate("/login");
     } catch (erro) {
-      setErroGeral(erro.message);
+      setErroGeral(erro.response?.data?.message || "Erro ao redefinir a senha");
     } finally {
       setLoading(false);
     }
@@ -87,7 +87,7 @@ const ResetPassword = () => {
               </small>
             )}
             {erro.novaSenha && (
-              <small className="erro-message">{erro.novaSenha}</small>
+              <small className="error-message">{erro.novaSenha}</small>
             )}
           </div>
 
@@ -102,7 +102,7 @@ const ResetPassword = () => {
               onChange={(e) => setConfirmarSenha(e.target.value)}
             />
             {erro.confirmarSenha && (
-              <small className="erro-message">{erro.confirmarSenha}</small>
+              <small className="error-message">{erro.confirmarSenha}</small>
             )}
           </div>
 
