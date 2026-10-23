@@ -7,6 +7,7 @@ import { Calendar } from "primereact/calendar";
 import api from "../../configs/axiosConfig";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { formatarMoeda } from "../../utils/formatarMoeda";
+import { formatarData } from "../../utils/formatarData";
 import "../Dashboard/Dashboard.css";
 import "./Transactions.css";
 
@@ -184,8 +185,8 @@ const Transacoes = () => {
               }
             >
               <span>{t.description}</span>
+              <span>{formatarData(t.date)}</span>
               <span>{formatarMoeda(t.amount)}</span>
-              <span>{t.date}</span>
             </li>
           ))}
         </ul>

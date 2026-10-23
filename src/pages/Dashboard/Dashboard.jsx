@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../configs/axiosConfig";
 import { formatarMoeda } from "../../utils/formatarMoeda";
+import { formatarData } from "../../utils/formatarData";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Dashboard.css";
 import {
@@ -120,8 +121,8 @@ const Dashboard = () => {
                 }
               >
                 <span>{lancamento.description}</span>
+                <span>{formatarData(lancamento.date)}</span>
                 <span>{formatarMoeda(lancamento.amount)}</span>
-                <span>{lancamento.date}</span>
               </li>
             ))}
           </ul>
