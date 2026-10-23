@@ -4,6 +4,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import api from "../../configs/axiosConfig";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { formatarMoeda } from "../../utils/formatarMoeda";
@@ -26,6 +27,7 @@ const Transacoes = () => {
   const [loading, setLoading] = useState(false);
   const [erroGeral, setErroGeral] = useState("");
   const [error, setError] = useState({});
+  const [editandoId, setEditandoId] = useState(null);
 
   useEffect(() => {
     async function init() {
@@ -50,6 +52,41 @@ const Transacoes = () => {
   async function carregar(id) {
     const resp = await api.get(`/api/v1/wallets/${id}/transactions`);
     setTransacoes(resp.data);
+  }
+  function excluir(id) {
+  confirmDialog({
+    message: "Tem certeza que deseja excluir esta transação?",
+    header: "Confirmar exclusão",
+    icon: "pi pi-exclamation-triangle",
+    acceptLabel: "Sim, excluir",
+    rejectLabel: "Cancelar",
+    accept: () => removerTransacao(id),
+  });
+}
+
+async function removerTransacao(id) {
+  try {
+    await api.delete(`/api/v1/wallets/${walletId}/transactions/${id}`);
+    carregar(walletId);
+  } catch (err) {
+    setErroGeral(err.response?.data?.message || "Erro ao excluir transação");
+  }
+}
+  function iniciarEdicao(t) {
+    setEditandoId(t.id);
+    setTipo(t.type);
+    setValor(t.amount);
+    setDescricao(t.description);
+    setData(new Date(t.date + "T00:00:00"));
+    setError({});
+  }
+
+  function cancelarEdicao() {
+    setEditandoId(null);
+    setValor(null);
+    setDescricao("");
+    setData(new Date());
+    setError({});
   }
 
   const validar = () => {
@@ -82,28 +119,35 @@ const Transacoes = () => {
     }
     setError({});
     setLoading(true);
-    try {
-      await api.post(`/api/v1/wallets/${walletId}/transactions`, {
-        type: tipo,
-        amount: valor,
-        description: descricao,
-        date: data.toISOString().split("T")[0],
-      });
-      setValor(null);
-      setDescricao("");
-      carregar(walletId);
-    } catch (err) {
-      setErroGeral(err.response?.data?.message || "Erro ao criar transação");
-    } finally {
-      setLoading(false);
+    
+    const corpo = {
+      type: tipo,
+      amount: valor,
+      description: descricao,
+      date: data.toISOString().split("T")[0],
+    };
+
+    try{
+    if(editandoId) {
+      await api.put(`/api/v1/wallets/${walletId}/transactions/${editandoId}`, corpo);
+    } else {
+      await api.post(`/api/v1/wallets/${walletId}/transactions`, corpo);
     }
+    carregar(walletId);
+    cancelarEdicao();
+  }catch (err) {
+    setErroGeral(err.response?.data?.message || "Erro ao salvar transação");
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <div className="dashboard-layout">
       <Sidebar />
       <div className="dashboard-content">
         <h1>Transações</h1>
+        <ConfirmDialog />
         {erroGeral && <p className="error-geral">{erroGeral}</p>}
 
         <form onSubmit={handleSubmit} className="transacao-form">
@@ -130,8 +174,6 @@ const Transacoes = () => {
               currency="BRL"
               locale="pt-BR"
             />
-            {error.valor && <span className="error-message">{error.valor}</span>}
-
           </div>
 
           <div className="p-inputs">
@@ -157,13 +199,15 @@ const Transacoes = () => {
 
           </div>
           </div>
-          
-            <Button
-            label={loading ? "Salvando..." : "Adicionar"}
-            type="submit"
-            className="nexion-btn"
-            disabled={loading}
-          />
+        
+          <Button label={ loading ? "Salvando..." : editandoId ? "Salvar alterações" : "Adicionar" }
+              type="submit"
+              className="nexion-btn"
+              disabled={loading} 
+                />
+                {editandoId && (
+                  <Button label="Cancelar" type="button" className="btn-cancelar" onClick={cancelarEdicao} />
+                )}
           </form>
 
         <h2>Lançamentos</h2>
@@ -180,13 +224,20 @@ const Transacoes = () => {
               key={t.id}
               className={
                 t.type === "INCOME"
-                  ? "lancamento receita"
-                  : "lancamento despesa"
+                  ? "lancamento acoes receita"
+                  : "lancamento acoes despesa"
               }
             >
               <span>{t.description}</span>
               <span>{formatarData(t.date)}</span>
               <span>{formatarMoeda(t.amount)}</span>
+            
+            <span className="acoes-botoes">
+              <Button icon="pi pi-pencil" className="btn-acao btn-editar"  type="button" onClick={() => iniciarEdicao(t)}
+              />
+              <Button icon="pi pi-trash" className="btn-acao btn-excluir" type="button" onClick={() => excluir(t.id)}
+                />          
+            </span>
             </li>
           ))}
         </ul>
