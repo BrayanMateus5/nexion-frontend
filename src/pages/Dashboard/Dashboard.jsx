@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { buscarDadosFinanceiros } from "../../mocks/financeiroMocks";
+import api from "../../configs/axiosConfig";
 import { formatarMoeda } from "../../utils/formatarMoeda";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Dashboard.css";
@@ -14,27 +14,43 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const DADOS_FINANCEIROS_VAZIOS = {
-  resumo: {
-    saldo: 0,
-    receitas: 0,
-    despesas: 0,
-  },
-  graficoMensal: [],
-  lancamentos: [],
-};
 
 const Dashboard = () => {
   //função para leitura e salvar o login do usuário no localStorage
   const usuarioLogado = JSON.parse(localStorage.getItem("nexion_user"));
-  const [dados, setDados] = useState(DADOS_FINANCEIROS_VAZIOS);
-  const [loading, setLoading] = useState(true); /*depois inicia o carregamento*/
+
+  const [resumo, setResumo] = useState(null);
+  const [grafico, setGrafico] = useState([]);
+  const [lancamentos, setLancamentos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState(null);
 
   useEffect(() => {
-    buscarDadosFinanceiros().then((resposta) => {
-      setDados(resposta ?? DADOS_FINANCEIROS_VAZIOS);
-      setLoading(false);
-    });
+    async function carregar() {
+      try {
+        const w = await api.get("/api/v1/wallets");
+        if(w.data.length === 0) {
+          setLoading(false);
+          return;
+        }
+        const walletId = w.data[0].id;
+
+        const [s, m, t] = await Promise.all([
+          api.get(`/api/v1/wallets/${walletId}/summary`),
+          api.get(`/api/v1/wallets/${walletId}/reports/monthly`),
+          api.get(`/api/v1/wallets/${walletId}/transactions`),
+        ]);
+        
+        setResumo(s.data);
+        setGrafico(m.data);
+        setLancamentos(t.data);
+      } catch {
+        setErro("Erro ao carregar dados financeiros.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    carregar();
   }, []);
 
   if (loading) {
@@ -50,22 +66,23 @@ const Dashboard = () => {
       <Sidebar />
       <div className="dashboard-content">
         <h1>Bem vindo, {usuarioLogado?.nome} !!</h1>
+            {erro && <p className="error-geral">{erro}</p>}
         <div className="dashboard">
           <div className="resumo-financeiro">
             <div className="card">
               <p>Saldo</p>
-              <strong>{formatarMoeda(dados.resumo?.saldo ?? 0)}</strong>
+              <strong>{formatarMoeda(resumo?.balance ?? 0)}</strong>
             </div>
             <div className="card">
               <p>Receitas</p>
               <strong className="valor-receita">
-                {formatarMoeda(dados.resumo?.receitas ?? 0)}
+                {formatarMoeda(resumo?.totalIncome ?? 0)}
               </strong>
             </div>
             <div className="card">
               <p>Despesas</p>
               <strong className="valor-despesa">
-                {formatarMoeda(dados.resumo?.despesas ?? 0)}
+                {formatarMoeda(resumo?.totalExpense ?? 0)}
               </strong>
             </div>
           </div>
@@ -74,17 +91,17 @@ const Dashboard = () => {
             <h2>Receitas X Despesas (últimos meses)</h2>
             <ResponsiveContainer width="100%" height={300}>
               {/*responsividade*/}
-              <BarChart data={dados.graficoMensal ?? []}>
+              <BarChart data={grafico}>
                 {/*dados do gráfico*/}
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
                 {/*linhas do gráfico*/}
-                <XAxis dataKey="mes" stroke="#a0a0a0" /> {/*eixo x do gráfico*/}
+                <XAxis dataKey="month" stroke="#a0a0a0" /> {/*eixo x do gráfico*/}
                 <YAxis stroke="#a0a0a0" /> {/*eixo y do gráfico*/}
                 <Tooltip /> {/*tooltip do gráfico*/}
                 <Legend /> {/*legenda do gráfico*/}
-                <Bar dataKey="receita" fill="#4ade80" name="Receitas" />
+                <Bar dataKey="income" fill="#4ade80" name="Receitas" />
                 {/*barra de receitas do gráfico*/}
-                <Bar dataKey="despesa" fill="#f87171" name="Despesas" />
+                <Bar dataKey="expense" fill="#f87171" name="Despesas" />
                 {/*barra de despesas do gráfico*/}
               </BarChart>
             </ResponsiveContainer>
@@ -93,18 +110,18 @@ const Dashboard = () => {
           {/*parte de lançamentos*/}
           <h2>Lançamentos recentes</h2>
           <ul className="lancamentos-list">
-            {(dados.lancamentos ?? []).map((lancamento) => (
+            {lancamentos.map((lancamento) => (
               <li
                 key={lancamento.id}
                 className={
-                  lancamento.tipo === "RECEITA"
+                  lancamento.type === "INCOME"
                     ? "lancamento receita"
                     : "lancamento despesa"
                 }
               >
-                <span>{lancamento.descricao}</span>
-                <span>{formatarMoeda(lancamento.valor)}</span>
-                <span>{lancamento.data}</span>
+                <span>{lancamento.description}</span>
+                <span>{formatarMoeda(lancamento.amount)}</span>
+                <span>{lancamento.date}</span>
               </li>
             ))}
           </ul>
