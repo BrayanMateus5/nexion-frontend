@@ -147,37 +147,49 @@
     padding: 0.6rem;
     margin: 0;
 }
+
 .mensagem-neutra {
-  color: #4ade80;
-  text-align: center;
-  background-color: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0;
+    color: #4ade80;
+    text-align: center;
+    background-color: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0;
 }
 
 /*Travar cor de fundo dos quadros quando o navegador preenche automaticamente os campos de email e senha*/
 .auth-form-card input:-webkit-autofill,
 .auth-form-card input:-webkit-autofill:hover,
 .auth-form-card input:-webkit-autofill:focus {
-    
-    -webkit-box-shadow: 0 0 0px 1000px #252525 inset;   /*pinta o fundo do quadro*/ 
-    -webkit-text-fill-color: #ffffff;                   /*pinta a cor da letra*/
 
-    caret-color: #ffffff;                                  /*pinta a cor do cursor*/
-    transition: background-color 5000s ease-in-out 0s;         /*evita que o navegador pinte o fundo do quadro de branco*/
+    -webkit-box-shadow: 0 0 0px 1000px #252525 inset;
+    /*pinta o fundo do quadro*/
+    -webkit-text-fill-color: #ffffff;
+    /*pinta a cor da letra*/
+
+    caret-color: #ffffff;
+    /*pinta a cor do cursor*/
+    transition: background-color 5000s ease-in-out 0s;
+    /*evita que o navegador pinte o fundo do quadro de branco*/
 }
 
 .forca-senha {
-    font-size: 0.85rem; text-transform: capitalize; 
+    font-size: 0.85rem;
+    text-transform: capitalize;
 }
+
 .forca-fraca {
-    color: #f87171; /* vermelho */
+    color: #f87171;
+    /* vermelho */
 }
+
 .forca-media {
-    color: #fbbf24; /* amarelo */
+    color: #fbbf24;
+    /* amarelo */
 }
+
 .forca-forte {
-    color: #4ade80; /* verde */
+    color: #4ade80;
+    /* verde */
 }

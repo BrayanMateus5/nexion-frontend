@@ -29,8 +29,10 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       await authService.emailForgotPassword(email);
-      setMensagem("Se o e-mail estiver cadastrado, você receberá as instruções em instantes..");
-    }catch{
+      setMensagem(
+        "Se o e-mail estiver cadastrado, você receberá as instruções em instantes..",
+      );
+    } catch {
       setErro("Erro ao processar a solicitação. Tente novamente..");
     } finally {
       setLoading(false);

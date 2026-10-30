@@ -8,10 +8,12 @@
 
 .transacao-form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /*define a responsividade do grid*/
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /*define a responsividade do grid*/
     gap: 1rem;
-    align-items:start;
+    align-items: start;
 }
+
 .transacao-form-grid .p-dropdown,
 .transacao-form-grid .p-calendar,
 .transacao-form-grid .p-inputnumber {
@@ -43,11 +45,11 @@
 }
 
 .transacao-form .nexion-btn {
- width: auto;
- display: block;
- margin-left: auto;
- margin-top: 1.5rem;
- padding: 0.75rem 2.5rem;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-top: 1.5rem;
+    padding: 0.75rem 2.5rem;
 }
 
 .lancamento.acoes {
@@ -68,14 +70,19 @@
 }
 
 .btn-editar {
-    color: #0ea5e9; /* Azul */
+    color: #0ea5e9;
+    /* Azul */
 }
+
 .btn-excluir {
-    color: #f87171; /* Vermelho */
+    color: #f87171;
+    /* Vermelho */
 }
+
 .btn-editar:hover {
     background-color: rgba(14, 165, 233, 0.15);
 }
+
 .btn-excluir:hover {
     background-color: rgba(248, 113, 113, 0.15);
 }

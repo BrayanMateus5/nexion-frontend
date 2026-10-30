@@ -33,11 +33,10 @@ const Sidebar = () => {
           <span>Dashboard</span>
         </Link>
 
-        
-          <Link to="/transactions" className="nav-item">
-            <i className="pi pi-wallet" />
-            <span>Transações</span>
-          </Link>
+        <Link to="/transactions" className="nav-item">
+          <i className="pi pi-wallet" />
+          <span>Transações</span>
+        </Link>
 
         <div className="nav-item">
           <i className="pi pi-tags" />

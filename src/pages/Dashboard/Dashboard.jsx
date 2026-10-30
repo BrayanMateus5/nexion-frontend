@@ -15,7 +15,6 @@ import {
   CartesianGrid,
 } from "recharts";
 
-
 const Dashboard = () => {
   //função para leitura e salvar o login do usuário no localStorage
   const usuarioLogado = JSON.parse(localStorage.getItem("nexion_user"));
@@ -25,23 +24,27 @@ const Dashboard = () => {
   const [lancamentos, setLancamentos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
+  const [walletId, setWalletId] = useState(null);
+  const [insight, setInsight] = useState("");
+  const [carregandoInsight, setCarregandoInsight] = useState(false);
 
   useEffect(() => {
     async function carregar() {
       try {
         const w = await api.get("/api/v1/wallets");
-        if(w.data.length === 0) {
+        if (w.data.length === 0) {
           setLoading(false);
           return;
         }
-        const walletId = w.data[0].id;
+        const id = w.data[0].id;
+        setWalletId(id);
 
         const [s, m, t] = await Promise.all([
-          api.get(`/api/v1/wallets/${walletId}/summary`),
-          api.get(`/api/v1/wallets/${walletId}/reports/monthly`),
-          api.get(`/api/v1/wallets/${walletId}/transactions`),
+          api.get(`/api/v1/wallets/${id}/summary`),
+          api.get(`/api/v1/wallets/${id}/reports/monthly`),
+          api.get(`/api/v1/wallets/${id}/transactions`),
         ]);
-        
+
         setResumo(s.data);
         setGrafico(m.data);
         setLancamentos(t.data);
@@ -53,6 +56,16 @@ const Dashboard = () => {
     }
     carregar();
   }, []);
+  useEffect(() => {
+    if (!walletId) return;
+
+    setCarregandoInsight(true);
+    api
+      .get(`/api/v1/wallets/${walletId}/insights`)
+      .then((r) => setInsight(r.data.message))
+      .catch(() => setInsight("Não foi possível carregar a análise.."))
+      .finally(() => setCarregandoInsight(false));
+  }, [walletId]);
 
   if (loading) {
     return (
@@ -67,7 +80,7 @@ const Dashboard = () => {
       <Sidebar />
       <div className="dashboard-content">
         <h1>Bem vindo, {usuarioLogado?.nome} !!</h1>
-            {erro && <p className="error-geral">{erro}</p>}
+        {erro && <p className="error-geral">{erro}</p>}
         <div className="dashboard">
           <div className="resumo-financeiro">
             <div className="card">
@@ -87,6 +100,14 @@ const Dashboard = () => {
               </strong>
             </div>
           </div>
+          <div className="insight-card">
+            <h2>Análise inteligente</h2>
+            {carregandoInsight ? (
+              <p className="insight-loading">Analisando seus gastos...</p>
+            ) : (
+              <p>{insight}</p>
+            )}
+          </div>
 
           <div className="grafico-mensal">
             <h2>Receitas X Despesas (últimos meses)</h2>
@@ -96,13 +117,24 @@ const Dashboard = () => {
                 {/*dados do gráfico*/}
                 <CartesianGrid strokeDasharray="3 3" stroke="#2a2a2a" />
                 {/*linhas do gráfico*/}
-                <XAxis dataKey="month" stroke="#a0a0a0" /> {/*eixo x do gráfico*/}
+                <XAxis dataKey="month" stroke="#a0a0a0" />{" "}
+                {/*eixo x do gráfico*/}
                 <YAxis stroke="#a0a0a0" /> {/*eixo y do gráfico*/}
                 <Tooltip /> {/*tooltip do gráfico*/}
                 <Legend /> {/*legenda do gráfico*/}
-                <Bar dataKey="income" fill="#4ade80" name="Receitas" />
+                <Bar
+                  dataKey="income"
+                  fill="#4ade80"
+                  name="Receitas"
+                  maxBarSize={60}
+                />
                 {/*barra de receitas do gráfico*/}
-                <Bar dataKey="expense" fill="#f87171" name="Despesas" />
+                <Bar
+                  dataKey="expense"
+                  fill="#f87171"
+                  name="Despesas"
+                  maxBarSize={60}
+                />
                 {/*barra de despesas do gráfico*/}
               </BarChart>
             </ResponsiveContainer>

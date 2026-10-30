@@ -19,84 +19,106 @@
     margin-bottom: 2.5rem;
 }
 
-    .card {
-        flex: 1;
-        background-color: #111111;
-        border: 1px solid #2a2a2a;
-        border-radius: 12px;
-        padding: 1.5rem;
-    }
+.card {
+    flex: 1;
+    background-color: #111111;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
 
-    .card p {
-        color: #a0a0a0;
-        margin: 0 0 0.5rem 0;
-        font-size: 0.9rem;
-    }
+.card p {
+    color: #a0a0a0;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+}
 
-    .card strong {
-        font-size: 1.8rem;
-    }
+.card strong {
+    font-size: 1.8rem;
+}
 
-    .valor-receita {
-        color: #4ade80; /* Verde */
-    }
-    .valor-despesa {
-        color: #f87171; /* Vermelho */
-    }
+.valor-receita {
+    color: #4ade80;
+    /* Verde */
+}
 
-    .lancamentos-list {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        max-width: 900px;
-    }
+.valor-despesa {
+    color: #f87171;
+    /* Vermelho */
+}
 
-    .lancamento {
-        display: grid;
-        grid-template-columns: 1fr 110px 140px;
-        align-items: center;
-        gap: 1rem;
-        background-color: #1a1a1a;
-        padding: 0.75rem 1rem;
-        border-radius: 10px;
-        border-left: 4px solid transparent;
-    }
+.lancamentos-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-width: 900px;
+}
 
-    .lancamento.receita {
-        border-left-color: #4ade80; /* Verde */
-    }
-    .lancamento.despesa {
-        border-left-color: #f87171; /* Vermelho */
-    }
+.lancamento {
+    display: grid;
+    grid-template-columns: 1fr 110px 140px;
+    align-items: center;
+    gap: 1rem;
+    background-color: #1a1a1a;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border-left: 4px solid transparent;
+}
 
-    .grafico-mensal {
-        background-color: #1a1a1a;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
+.lancamento.receita {
+    border-left-color: #4ade80;
+    /* Verde */
+}
 
-    .dashboard-layout {
-        display: flex;
-        min-height: 100vh;
-        background-color: #101010;
-    }
+.lancamento.despesa {
+    border-left-color: #f87171;
+    /* Vermelho */
+}
 
-    .dashboard-content {
-        flex: 1;
-        padding: 2rem;
-        color: #ffffff;
-        overflow-y: auto;
-    }
+.grafico-mensal {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
 
-    .lancamento span:nth-child(2) {
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #101010;
+}
+
+.dashboard-content {
+    flex: 1;
+    padding: 2rem;
+    color: #ffffff;
+    overflow-y: auto;
+    min-width: 0;
+}
+
+.lancamento span:nth-child(2) {
     text-align: center;
     color: #a0a0a0;
-    }
+}
 
-    .lancamento span:nth-child(3) {
+.lancamento span:nth-child(3) {
     text-align: right;
-    }
+}
+
+.insight-card {
+    background-color: #111111;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border-left: 4px solid #06b6d4;
+    line-height: 1.6;
+
+}
+
+.insight-loading {
+    color: #a0a0a0;
+    font-style: italic;
+
+}

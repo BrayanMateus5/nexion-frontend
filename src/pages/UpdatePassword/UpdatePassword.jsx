@@ -56,7 +56,9 @@ const UpdatePassword = () => {
       setNovaSenha("");
       setConfirmarSenha("");
     } catch (error) {
-      setErro({ senhaAtual: error.response?.data?.message || "Erro ao alterar a senha",});
+      setErro({
+        senhaAtual: error.response?.data?.message || "Erro ao alterar a senha",
+      });
     } finally {
       setLoading(false);
     }
