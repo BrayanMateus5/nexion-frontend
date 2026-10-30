@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
   const [walletId, setWalletId] = useState(null);
-  const [insight, setInsight] = useState("");
+  const [insight, setInsight] = useState([]);
   const [carregandoInsight, setCarregandoInsight] = useState(false);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ const Dashboard = () => {
     setCarregandoInsight(true);
     api
       .get(`/api/v1/wallets/${walletId}/insights`)
-      .then((r) => setInsight(r.data.message))
-      .catch(() => setInsight("Não foi possível carregar a análise.."))
+      .then((r) => setInsight(r.data.observacoes))
+      .catch(() => setInsight(["Não foi possível carregar a análise.."]))
       .finally(() => setCarregandoInsight(false));
   }, [walletId]);
 
@@ -105,7 +105,14 @@ const Dashboard = () => {
             {carregandoInsight ? (
               <p className="insight-loading">Analisando seus gastos...</p>
             ) : (
-              <p>{insight}</p>
+              <div className="insight-grid">
+                {insight.map((obs, i) => (
+                  <div className="insight-item" key={i}>
+                    <span className="insight-numero">{i + 1}</span>
+                    <p>{obs}</p>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
 
