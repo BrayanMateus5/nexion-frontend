@@ -83,7 +83,8 @@ const Login = () => {
             <label htmlFor="email">Email</label>
             <InputText
               id="email"
-              type="text"
+              type="email"
+              autoCapitalize="none"
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

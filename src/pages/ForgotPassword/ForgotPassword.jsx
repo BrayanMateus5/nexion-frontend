@@ -57,6 +57,8 @@ const ForgotPassword = () => {
                 <label htmlFor="email">Email</label>
                 <InputText
                   id="email"
+                  type="email"
+                  autoCapitalize="none"
                   placeholder="Digite seu email de cadastro"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

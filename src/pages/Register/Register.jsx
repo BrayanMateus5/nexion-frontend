@@ -100,6 +100,8 @@ const Register = () => {
             <label htmlFor="email">Email</label>
             <InputText
               id="email"
+              type="email"
+              autoCapitalize="none"
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
