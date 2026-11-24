@@ -5,6 +5,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { useNotificacoes } from "../../hooks/useNotificacoes";
 import api from "../../configs/axiosConfig";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { formatarMoeda } from "../../utils/formatarMoeda";
@@ -28,6 +29,8 @@ const Transacoes = () => {
   const [erroGeral, setErroGeral] = useState("");
   const [error, setError] = useState({});
   const [editandoId, setEditandoId] = useState(null);
+
+  useNotificacoes(walletId, () => carregar(walletId));
 
   useEffect(() => {
     async function init() {

@@ -27,6 +27,9 @@ const Dashboard = () => {
   const [walletId, setWalletId] = useState(null);
   const [insight, setInsight] = useState([]);
   const [carregandoInsight, setCarregandoInsight] = useState(false);
+  const [versao, setVersao] = useState(0);
+
+  useNotificacoes(walletId, () => setVersao((v) => v + 1));
 
   useEffect(() => {
     async function carregar() {
@@ -55,7 +58,7 @@ const Dashboard = () => {
       }
     }
     carregar();
-  }, []);
+  }, [versao]);
   useEffect(() => {
     if (!walletId) return;
 
