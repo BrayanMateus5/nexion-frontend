@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../../configs/axiosConfig";
 import { formatarMoeda } from "../../utils/formatarMoeda";
 import { formatarData } from "../../utils/formatarData";
+import { useNotificacoes } from "../../hooks/useNotificacoes";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Dashboard.css";
 import {

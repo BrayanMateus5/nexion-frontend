@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 export function useNotificacoes(walletId, aoAtualizar) {
-  const callbackRef = useRef(aoAtualizar);
-  callbackRef.current = aoAtualizar;
+  const onAtualizar = useEffectEvent(aoAtualizar);
 
   useEffect(() => {
     if (!walletId) return;
@@ -12,7 +11,7 @@ export function useNotificacoes(walletId, aoAtualizar) {
     const url = `${baseUrl}/api/v1/wallets/${walletId}/stream?token=${encodeURIComponent(token)}`;
 
     const fonte = new EventSource(url);
-    fonte.addEventListener("transacoes", () => callbackRef.current());
+    fonte.addEventListener("transacoes", () => onAtualizar());
 
     return () => fonte.close();
   }, [walletId]);
